@@ -6,7 +6,7 @@
 html,
 body {
     font-size: 18px;
-    background-color: #f5f6f7;
+    background-color: #222222;
 }
 
 h1 {
@@ -16,6 +16,7 @@ h1 {
     font-weight: 700;
     line-height: 1.1;
     margin: 40px 0;
+    color: aliceblue;
 }
 
 .App {
