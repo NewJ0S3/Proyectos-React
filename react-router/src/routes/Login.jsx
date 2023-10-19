@@ -4,20 +4,26 @@ import { UserContext } from "./context/UserContext";
 
 
 export const Login = () => {
-    const initialForm = {
-        name: '',
-        tecnology: '',
-        email: '',
-        socialMedia: ''
-    }
+    // Definición del estado inicial del formulario
+  const initialForm = {
+    name: '',
+    technology: '',
+    email: '',
+    socialMedia: ''
+  }
+  
+  // Uso de un custom hook 'useForm' para gestionar el estado del formulario
+  const { formState, name, technology, email, socialMedia, onInputChange } = useForm(initialForm);
+  
+  // Importación de la función 'setUser' desde el contexto 'UserContext'
+  const { setUser } = useContext(UserContext);
+  
+  // Función para manejar el evento de envío del formulario
+  const onSubmit = (e) => {
+    e.preventDefault(); // Previene la recarga de la página al enviar el formulario
+    setUser(formState); // Llama a la función 'setUser' para almacenar los datos del formulario en el contexto
+  }
 
-    const { formState, name, tecnology, email, socialMedia, onInputChange } = useForm(initialForm);
-    const { setUser } = useContext( UserContext )
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        setUser(formState);
-    }
 
   return (
     <>

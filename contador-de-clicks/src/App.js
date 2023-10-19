@@ -6,14 +6,17 @@ import { useState } from 'react';
 
 function App() {
 
+  // Estado local para almacenar el número de clicks
   const [numClicks, setNumClicks] = useState(0);
 
+  // Función para manejar el evento de click
   const manejarClick = () => {
-    setNumClicks(numClicks + 1);
+    setNumClicks(numClicks + 1); // Incrementa el número de clicks en 1
   };
 
+  // Función para reiniciar el contador de clicks
   const reiniciarContador = () => {
-    setNumClicks(0);
+    setNumClicks(0); // Establece el número de clicks a 0, reiniciando el contador
   };
 
   return (

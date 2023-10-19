@@ -2,30 +2,41 @@ import { useState } from "react"
 
 export const BuscadorPeliculas = () => {
 
-  const urlBase = 'https://api.themoviedb.org/3/search/movie'
-  const API_KEY = 'b61798973b1b7bcec9381a2fae7f806a'
-
-  const [busqueda, setBusqueda] = useState('')
-  const [peliculas, setPeliculas] = useState([])
-
+  // Definición de la URL base de la API y la clave de acceso
+  const urlBase = 'https://api.themoviedb.org/3/search/movie';
+  const API_KEY = 'b61798973b1b7bcec9381a2fae7f806a';
+  
+  // Definición de estados con React hooks
+  const [busqueda, setBusqueda] = useState('');  // Estado para almacenar la búsqueda de películas
+  const [peliculas, setPeliculas] = useState([]);  // Estado para almacenar las películas encontradas
+  
+  // Función para manejar cambios en el input de búsqueda
   const handleInputChange = (e) => {
-    setBusqueda(e.target.value)
-  }
+    setBusqueda(e.target.value);
+  };
+  
+  // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
-    e.preventDefault()
-    fetchPeliculas()
-  }
-
+    e.preventDefault();
+    fetchPeliculas();  // Llamar a la función para buscar películas
+  };
+  
+  // Función asincrónica para buscar películas
   const fetchPeliculas = async () => {
     try {
-      const response = await fetch(`${urlBase}?query=${busqueda}&api_key=${API_KEY}`)
-      const data = await response.json()
-      console.log(data.results)
-      setPeliculas(data.results)
+      // Realizar una solicitud a la API con la búsqueda y la clave de acceso
+      const response = await fetch(`${urlBase}?query=${busqueda}&api_key=${API_KEY}`);
+      // Convertir la respuesta en formato JSON
+      const data = await response.json();
+      console.log(data.results);  // Mostrar los resultados en la consola
+      // Almacenar las películas encontradas en el estado películas
+      setPeliculas(data.results);
     } catch (error) {
-      console.error('Ha ocurrido un error: ', error)
+      // Capturar y manejar errores en caso de problemas con la solicitud
+      console.error('Ha ocurrido un error: ', error);
     }
-  }
+  };
+
 
   return (
     <div className="container">

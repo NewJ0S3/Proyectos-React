@@ -3,15 +3,19 @@ import { CarritoContext } from "../context/CarritoContext"
 
 export const CarritoPage = () => {
 
-    const { listaCompras, aumentarCantidad, disminuirCantidad, eliminarCompra } = useContext(CarritoContext)
+    // Importación de funciones y estado del contexto CarritoContext
+    const { listaCompras, aumentarCantidad, disminuirCantidad, eliminarCompra } = useContext(CarritoContext);
 
+    // Función para calcular el total de la compra
     const calcularTotal = () => {
-        return listaCompras.reduce((total, item) => total + item.price * item.cantidad, 0 ).toFixed(2)
+        return listaCompras.reduce((total, item) => total + item.price * item.cantidad, 0).toFixed(2);
+        // Reduce la lista de compras para calcular el total multiplicando el precio por la cantidad
+        // El valor inicial (0) asegura que el cálculo comience en 0 y toFixed(2) limita los decimales a 2
     }
 
+    // Función para manejar la impresión
     const handleImpresion = () => {
-
-        print()
+        print(); // Llama a la función "print()" para la impresión
     }
 
     return (

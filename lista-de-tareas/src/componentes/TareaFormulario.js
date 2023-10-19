@@ -4,23 +4,29 @@ import {v4 as uuidv4} from "uuid";
 
 function TareaFormulario(props) {
 
+    // Estado local para el valor de entrada en un formulario
     const [input, setInput] = useState("");
 
-    const manejarCambio = e => {
-        setInput(e.target.value);
+    // Función para manejar cambios en el input
+    const manejarCambio = (e) => {
+      setInput(e.target.value);  // Actualiza el estado 'input' con el valor del input
+    }
+    
+    // Función para manejar el envío de un formulario
+    const manejarEnvio = (e) => {
+      e.preventDefault();  // Evita que la página se recargue al enviar el formulario
+    
+      // Crear un nuevo objeto 'tareaNueva' con un ID único, texto del input y marcado como no completada
+      const tareaNueva = {
+        id: uuidv4(),  // Genera un ID único utilizando la función 'uuidv4'
+        texto: input,  // Utiliza el valor actual del 'input'
+        completada: false,  // Inicialmente, la tarea no está completada
+      }
+  
+      // Llama a la función 'props.onSubmit' pasando la nueva tarea como argumento
+      props.onSubmit(tareaNueva);
     }
 
-    const manejarEnvio = e => {
-        e.preventDefault();
-
-        const tareaNueva = {
-            id: uuidv4(),
-            texto: input,
-            completada: false
-        }
-
-        props.onSubmit(tareaNueva);
-    }
 
     return (
         <form 

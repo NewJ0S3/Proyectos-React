@@ -2,30 +2,39 @@ import { useState } from "react"
 
 export const WheatherApp = () => {
 
-    const urlBase = 'https://api.openweathermap.org/data/2.5/weather'
-    const API_KEY = 'dc752854bc7f074f9e51a22110d79bcb'
-    const difKelvin = 273.15
-
-    const [ciudad, setCiudad] = useState('')
-    const [dataClima, setDataClima] = useState(null)
-
-    const handleCambioCiudad = (e) => {
-        setCiudad(e.target.value)
+  // Definición de la URL base de la API y la clave de acceso
+  const urlBase = 'https://api.openweathermap.org/data/2.5/weather';
+  const API_KEY = 'dc752854bc7f074f9e51a22110d79bcb';
+  const difKelvin = 273.15;  // Valor constante para convertir de Kelvin a Celsius
+  // Definición de estados con React hooks
+  const [ciudad, setCiudad] = useState('');  // Estado para almacenar la ciudad
+  const [dataClima, setDataClima] = useState(null);  // Estado para almacenar los datos del clima
+  // Función para manejar cambios en el input de ciudad
+  const handleCambioCiudad = (e) => {
+    setCiudad(e.target.value);
+  };
+  // Función para manejar el envío del formulario
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (ciudad.length > 0) {
+      fetchClima();  // Llamar a la función para buscar datos del clima
     }
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        if(ciudad.length > 0) fetchClima()
+  };
+  // Función asincrónica para buscar datos del clima
+  const fetchClima = async () => {
+    try {
+      // Realizar una solicitud a la API con la ciudad y la clave de acceso
+      const response = await fetch(`${urlBase}?q=${ciudad}&appid=${API_KEY}`);
+      // Convertir la respuesta en formato JSON
+      const data = await response.json();
+      // Almacenar los datos del clima en el estado dataClima
+      setDataClima(data);
+    } catch (error) {
+      // Capturar y manejar errores en caso de problemas con la solicitud
+      console.error('Ocurrió el siguiente problema: ', error);
     }
+  };
 
-    const fetchClima = async () => {
-        try{
-            const response = await fetch(`${urlBase}?q=${ciudad}&appid=${API_KEY}`)
-            const data = await response.json()
-            setDataClima(data)
-        }catch(error){
-            console.error('Ocurrió el siguiente problema: ', error)
-        }
-    }
 
 
   return (

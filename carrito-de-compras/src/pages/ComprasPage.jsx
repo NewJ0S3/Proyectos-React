@@ -5,17 +5,21 @@ import { CarritoContext } from "../context/CarritoContext"
 
 export const ComprasPage = () => {
 
-    const { productos } = useContext( ProductosContext )
+  // Importación del estado de productos desde el contexto ProductosContext
+  const { productos } = useContext(ProductosContext);
 
-    const { agregarCompra, eliminarCompra } = useContext(CarritoContext)
+  // Importación de las funciones agregarCompra y eliminarCompra desde el contexto CarritoContext
+  const { agregarCompra, eliminarCompra } = useContext(CarritoContext);
 
-    const handleAgregar = (compra) =>{
-      agregarCompra(compra)
-    }
-    const handleQuitar = (id) =>{
-      eliminarCompra(id)
-    }
-   
+  // Función para manejar la acción de agregar una compra al carrito
+  const handleAgregar = (compra) => {
+    agregarCompra(compra); // Llama a la función agregarCompra con los detalles de la compra
+  }
+
+  // Función para manejar la acción de quitar una compra del carrito por su ID
+  const handleQuitar = (id) => {
+    eliminarCompra(id); // Llama a la función eliminarCompra con el ID de la compra a eliminar
+  }
 
   return (
     <>
